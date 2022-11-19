@@ -3,12 +3,13 @@
 
 import {gql,GraphQLClient} from "graphql-request"
 
-const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT
+const graphqlAPI = process.env.REACT_APP_NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
 export default async function comments(req,res){
+  if(!graphqlAPI) return;
   const graphQLClient= new GraphQLClient(graphqlAPI,{
     headers :{
-      authorization : `Bearer ${process.env.GRAPHCMS_TOKEN}`
+      authorization : `Bearer ${process.env.REACT_APP_GRAPHCMS_TOKEN}`
     }
   })
   const query = gql`

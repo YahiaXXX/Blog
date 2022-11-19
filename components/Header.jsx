@@ -2,24 +2,23 @@ import React,{useContext,useState,useEffect} from 'react'
 import Link from "next/link"
 import {getCategories} from "../services/index"
 
-// const cat = [{
-//     name:"React",slug:"react"
-// },{
-//     name:"Web Dev",slug:"webdev"
-// }]
 
 function Header() {
     const [categ,setCateg]=useState([])
+    const getC = async () => {
+      const res = await getCategories()
+      setCateg(res)
+   }
     useEffect(()=>{
-      getCategories().then(categories=>setCateg(categories))
-    },[])
+      getC()
+      },[])
   return (
     <div className='container mx-auto px-10 mb-8' >
         <div className='border-b w-full inline-block border-blue-400 py-8' >
             <div className='md:float-left block ' >
              <Link href="/" >
                 <span className=' cursor-pointer font-bold text-4xl text-white' >
-                    YahiaCMS
+                  Blog
                 </span>
              </Link>
             </div>

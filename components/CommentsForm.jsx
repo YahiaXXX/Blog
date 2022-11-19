@@ -1,10 +1,8 @@
 import React,{useState,useEffect} from 'react'
 import { useRef } from 'react'
-import {submitComment} from "../services/index"
 
 function CommentsForm({slug}) {
   const [error,setError]=useState(false)
-  const [localStorage,setLocalStorage]=useState(null)
   const [showSuccessMsg,setShowSuccessMsg]=useState(false)
   const commentEl=useRef()
   const nameEl=useRef()
@@ -16,9 +14,22 @@ function CommentsForm({slug}) {
     emailEl.current.value=window.localStorage.getItem('email')
 
   },[])
+  const submitComment = async (x) => {
+
+    const res = await fetch('/api/comments',{
+      method:'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body:JSON.stringify(x)
+    }) 
+     return res.json()
+  
+  
+  }
 
   const handleCommentSubmit=()=>{
-    setError(false)
+    setError(false);
     if(!commentEl.current.value ||!nameEl.current.value ||!emailEl.current.value){
       setError(true)
       return
@@ -37,12 +48,15 @@ function CommentsForm({slug}) {
       window.localStorage.removeItem("email",emailEl.current.value)
     }
 
-    submitComment(commentObj).then(res=>{
+    submitComment(commentObj).then(()=>{
       setShowSuccessMsg(true);
       setTimeout(()=>{
         setShowSuccessMsg(false)
 
       },3000)
+      nameEl.current.value="";
+      emailEl.current.value="";
+      commentEl.current.value="";
     
     
     })

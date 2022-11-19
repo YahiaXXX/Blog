@@ -1,4 +1,3 @@
-import type { NextPage } from 'next'
 import Head from 'next/head'
 import {getPosts} from "../services"
 import Categories from "../components/Categories"
@@ -7,22 +6,10 @@ import PostCard from "../components/PostCard"
 import FeaturedPosts from "../sections/FeaturedPosts"
 
 
-// const posts = [{
-//   title:"React Testing",excerpt:"Learn react testing"
-// },{
-//   title:"React with tailwind",excerpt:"Learn react with tailwind"
-// }]
 
-const Home: NextPage = ({posts}) => {
-  // const [posts,setPosts] = useState([])
-  // useEffect(()=>{
-  //   const geet = async ()=>{
-  //     const res = await getPosts()
-  //     setPosts(res)
-  //   }
-  //   geet()
 
-  // },[])
+export default function Home({posts}) {
+
   return (
     <div className="container mx-auto px-10 mb-8">
       <Head>
@@ -51,13 +38,12 @@ const Home: NextPage = ({posts}) => {
   )
 }
 
-export default Home
+
 
 
 export async function getStaticProps(){
-  const posts = (await getPosts()) || []
-
+  const posts = (await getPosts()) || [];
   return {
-    props : {posts}
-  }
+    props: { posts },
+  };
 }

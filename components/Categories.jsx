@@ -6,6 +6,7 @@ function Categories() {
   const [categ,setCateg]=useState([])
   useEffect(()=>{
     getCategories().then(categories=>setCateg(categories))
+    console.log(process.env.REACT_APP_NEXT_PUBLIC_GRAPHCMS_ENDPOINT)
   },[])
   return (
     <div className=' bg-white shadow-lg rounded-lg p-8 mb-8 pb-12'  >
@@ -24,3 +25,4 @@ function Categories() {
 }
 
 export default Categories
+
