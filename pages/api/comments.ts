@@ -5,7 +5,7 @@ import {gql,GraphQLClient} from "graphql-request"
 
 const graphqlAPI = process.env.REACT_APP_NEXT_PUBLIC_GRAPHCMS_ENDPOINT;
 
-export default async function comments(req,res){
+export default async function comments(req:any,res:any){
   if(!graphqlAPI) return;
   const graphQLClient= new GraphQLClient(graphqlAPI,{
     headers :{
